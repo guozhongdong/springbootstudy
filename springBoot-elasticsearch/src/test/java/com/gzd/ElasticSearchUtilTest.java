@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.ResourceUtils;
 
+import java.io.FileNotFoundException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,17 +27,28 @@ public class ElasticSearchUtilTest {
         map.put("clusterName","elasticsearch");
         map.put("url","127.0.0.1:9300");
 
-        try {
-            ElasticSearchUtil elasticSearchUtil = new ElasticSearchUtil(map);
-            Map<String,Object> param = new HashMap<>();
-            param.put("name","cehsi33");
-            param.put("age","18");
+            try {
+                ElasticSearchUtil elasticSearchUtil = new ElasticSearchUtil(map);
+                Map<String,Object> param = new HashMap<>();
+                param.put("name","cehsi33");
+                param.put("age","18");
 
-            // 新增一条数据
-            elasticSearchUtil.addDoc("test2","test2",param);
-        } catch (UnknownHostException e) {
+                // 新增一条数据
+                elasticSearchUtil.addDoc("test2","test2",param);
+            } catch (UnknownHostException e) {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void test2(){
+        try {
+            String url = ResourceUtils.getURL("classpath:").getPath();
+            System.out.println(url);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

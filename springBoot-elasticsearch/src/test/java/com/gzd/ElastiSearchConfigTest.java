@@ -22,14 +22,35 @@ public class ElastiSearchConfigTest {
     @Autowired
     private ElasticSearchConfig elasticSearchConfig;
 
+
     /**
      * 通过springboot 配置客户端初始化
      * */
     @Test
     public void testAdd(){
         Map<String,Object> map = new HashMap<>();
-        map.put("name","haha99");
-        map.put("age",19);
-        elasticSearchConfig.addDoc("test","test",map);
+        for (int i = 0; i <100; i++) {
+            map.put("name","haha99"+i);
+            map.put("age",19+i);
+            elasticSearchConfig.addDoc("test3","test3",map);
+        }
+
+    }
+
+
+    /**
+     * 通过springboot 配置客户端初始化
+     * */
+    @Test
+    public void testAdd11(){
+        long start = System.currentTimeMillis();
+        Map<String,Object> map = new HashMap<>();
+
+        try {
+            elasticSearchConfig.outToFile("test3","test3","d:\\test.csv");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("时间为："+(System.currentTimeMillis()-start));
     }
 }
