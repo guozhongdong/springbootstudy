@@ -11,6 +11,7 @@
     <modules>
         <module>springBootRedis</module>
         <module>springBoot-Mybatis</module>
+        <module>springBoot-elasticsearch</module>
     </modules>
 
 
