@@ -1,0 +1,24 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.247.131:9092,192.168.247.137:9092,192.168.247.138:9092
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  #设置键的序列化组件
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      buffer-memory: 10000 #生产者缓存区大小，缓冲要发送到服务器的数据，
+      retries: 5  #生产者可以重发消息的次数
+      acks: 0 #0 不判断消息是否发送成功，1 等待leader接收成功 all 等待所有复制的节点收到消息。
+      batch-size: 100000   #一个批次可以使用的内存大小
+      client-id: 112 #任意一个字符串都可以，可以标识日志的参数。
+
+
+
+    consumer:
+      auto-offset-reset: latest
+      auto-commit-interval: 100ms  #自动提交偏移量的时间
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: mygroup_id
+      fetch-min-size: 1  #消费者从服务器获取的最小字节数
+      fetch-max-wait: 100ms #消费者获取服务器数据的最大等待时间
